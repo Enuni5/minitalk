@@ -10,6 +10,8 @@ NAME_SERVER = server
 
 NAME_CLIENT = client
 
+LIBRARY = libft/libft.a
+
 CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
@@ -19,12 +21,15 @@ RM = rm -f
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-$(NAME): ${OBJS_SERVER} ${OBJS_CLIENT}
-	${MAKE} -C ./libft 
-	${CC} ${NAME_SERVER} ${OBJS}
-	${CC} ${NAME_CLIENT} ${OBJS}
+all: ${NAME_SERVER} ${NAME_CLIENT}
 
-all: ${NAME}
+$(NAME_SERVER): ${OBJS_SERVER}
+	${MAKE} -C ./libft
+	${CC} ${OBJS_SERVER} ${LIBRARY} -o ${NAME_SERVER}
+
+$(NAME_CLIENT): ${OBJS_CLIENT}
+	${MAKE} -C ./libft 
+	${CC} ${OBJS_CLIENT} ${LIBRARY} -o ${NAME_CLIENT}
 
 clean:
 	${MAKE} -C ./libft clean 
@@ -32,7 +37,8 @@ clean:
 
 fclean: clean
 	${MAKE} -C ./libft fclean 
-	${RM} ${NAME}
+	${RM} ${NAME_CLIENT}
+	${RM} ${NAME_SERVER}
 
 re: fclean all
 

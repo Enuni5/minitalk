@@ -6,8 +6,14 @@
 /*   By: enunez-n <enunez-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 19:29:40 by enunez-n          #+#    #+#             */
-/*   Updated: 2022/08/22 19:29:41 by enunez-n         ###   ########.fr       */
+/*   Updated: 2022/08/22 20:27:02 by enunez-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-z
+#include "minitalk.h"
+
+int	main(void)
+{
+	ft_printf("hola, server");
+	return (0);
+}
