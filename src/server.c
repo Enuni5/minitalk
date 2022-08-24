@@ -6,13 +6,13 @@
 /*   By: enunez-n <enunez-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 19:29:40 by enunez-n          #+#    #+#             */
-/*   Updated: 2022/08/24 08:01:06 by enunez-n         ###   ########.fr       */
+/*   Updated: 2022/08/24 11:35:02 by enunez-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	receive_bits(int sig, siginfo_t *info, void *context)
+static void	receive_bits(int sig, siginfo_t *info, void *context)
 {
 	static unsigned char	str = 0;
 	static int				bit_pos = 7;
@@ -20,10 +20,10 @@ void	receive_bits(int sig, siginfo_t *info, void *context)
 
 	(void)context;
 	if (!c_pid)
-		c_pid = info.si_pid;
+		c_pid = info->si_pid;
 	if (sig == SIGUSR2)
 		str = (1 << bit_pos) | str;
-	i--;
+	bit_pos--;
 	if (bit_pos < 0)
 	{
 		if (str == '\0')
@@ -45,7 +45,7 @@ int	main(void)
 {
 	struct sigaction	signal_data;
 
-	ft_printf("\nSERVER PID: %d\n", getpid());
+	ft_printf("\nSERVER PID: %d\n\n", getpid());
 	signal_data.sa_sigaction = receive_bits;
 	signal_data.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &signal_data, NULL);

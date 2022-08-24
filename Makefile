@@ -21,25 +21,35 @@ RM = rm -f
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-all: ${NAME_SERVER} ${NAME_CLIENT}
+all:  norminette libft compile
+
+norminette: 
+	@echo "\n *** CHECKING 42 NORMINETTE ***\n"
+	@norminette src/
+
+libft: 
+	@echo "\n *** COMPILING LIBFT ***\n"
+	${MAKE} -C ./libft --silent
+
+compile: ${NAME_SERVER} ${NAME_CLIENT}
 
 $(NAME_SERVER): ${OBJS_SERVER}
-	${MAKE} -C ./libft
+	@echo "\n *** COMPILING SERVER PROGRAM ***\n"
 	${CC} ${OBJS_SERVER} ${LIBRARY} -o ${NAME_SERVER}
 
 $(NAME_CLIENT): ${OBJS_CLIENT}
-	${MAKE} -C ./libft 
+	@echo "\n *** COMPILING CLIENT PROGRAM ***\n"
 	${CC} ${OBJS_CLIENT} ${LIBRARY} -o ${NAME_CLIENT}
 
 clean:
-	${MAKE} -C ./libft clean 
+	${MAKE} -C ./libft clean --silent
 	${RM} ${OBJS_SERVER} ${OBJS_CLIENT} 
 
 fclean: clean
-	${MAKE} -C ./libft fclean 
+	${MAKE} -C ./libft fclean --silent
 	${RM} ${NAME_CLIENT}
 	${RM} ${NAME_SERVER}
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus libft compile norminette
