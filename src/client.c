@@ -6,7 +6,7 @@
 /*   By: enunez-n <enunez-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 19:29:47 by enunez-n          #+#    #+#             */
-/*   Updated: 2022/08/23 19:09:12 by enunez-n         ###   ########.fr       */
+/*   Updated: 2022/08/24 07:42:41 by enunez-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,17 @@ int	main(int argc, char **argv)
 	int		server_pid;
 	char	*str;
 
-	if (argc != 3)
+	if (argc != 3 | ft_strlen(argv[2]) == 0)
 	{
-		ft_printf("Wrong argument count");
+		ft_printf("Invalid arguments. Check server id / message sent");
 		return (0);
 	}
+	str = argv[2];
 	server_pid = ft_atoi(argv[1]);
+	while (str)
+	{
+		send_bits(&str, server_pid);
+		str++;
+	}
 	return (0);
 }
