@@ -45,6 +45,7 @@ clean:
 	${MAKE} -C ./libft clean --silent
 	${RM} ${OBJS_SERVER} ${OBJS_CLIENT} 
 
+
 fclean: clean
 	${MAKE} -C ./libft fclean --silent
 	${RM} ${NAME_CLIENT}
@@ -52,4 +53,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus libft compile norminette
+.PHONY: all clean fclean re libft compile norminette
