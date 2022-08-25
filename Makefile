@@ -78,12 +78,12 @@ $(NAME_CLIENT_BONUS): ${OBJS_CLIENT_BONUS}
 clean:
 	${MAKE} -C ./libft clean --silent
 	${RM} ${OBJS_SERVER} ${OBJS_CLIENT} 
+	${RM} ${OBJS_SERVER_BONUS} ${OBJS_CLIENT_BONUS}
 
 
 fclean: clean
 	${MAKE} -C ./libft fclean --silent
-	${RM} ${NAME_CLIENT}
-	${RM} ${NAME_SERVER}
+	${RM} ${NAME_CLIENT} ${NAME_SERVER}
 
 re: fclean all
 
