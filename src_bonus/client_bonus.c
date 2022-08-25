@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enunez-n <enunez-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 19:29:47 by enunez-n          #+#    #+#             */
-/*   Updated: 2022/08/25 17:22:28 by enunez-n         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:13:23 by enunez-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 int	send_bits(unsigned char c_byte, int server_pid)
 {
@@ -30,8 +30,22 @@ int	send_bits(unsigned char c_byte, int server_pid)
 	return (0);
 }
 
+void	receive_check(int sig)
+{
+	static int	received = 0;
+
+	if (sig == SIGUSR2)
+		++received;
+	else
+	{
+		ft_printf("\n%d bytes readed succesfully\n", received);
+		exit(0);
+	}
+}
+
 int	main(int argc, char **argv)
 {
+	int		server_pid;
 	char	*str;
 	size_t	i;
 
@@ -41,11 +55,16 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	str = argv[2];
+	server_pid = ft_atoi(argv[1]);
 	i = 0;
+	signal(SIGUSR1, receive_check);
+	signal(SIGUSR2, receive_check);
 	while (ft_strlen(str) >= i)
 	{
-		send_bits(str[i], ft_atoi(argv[1]));
+		send_bits(str[i], server_pid);
 		i++;
 	}
+	while (1)
+		pause();
 	return (0);
 }

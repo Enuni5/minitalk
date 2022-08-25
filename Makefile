@@ -10,6 +10,22 @@ NAME_SERVER = server
 
 NAME_CLIENT = client
 
+#BONUS DEFINITIONS#
+
+SRC_SERVER_BONUS = ./src_bonus/server_bonus.c
+
+SRC_CLIENT_BONUS = ./src_bonus/client_bonus.c
+
+OBJS_SERVER_BONUS = ${SRC_SERVER_BONUS:.c=.o}
+
+OBJS_CLIENT_BONUS = ${SRC_CLIENT_BONUS:.c=.o}
+
+NAME_SERVER_BONUS = server_bonus
+
+NAME_CLIENT_BONUS = client_bonus
+
+#COMPILATION UTILS#
+
 LIBRARY = libft/libft.a
 
 CC = gcc
@@ -17,6 +33,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
+
+#RULES#
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
@@ -40,6 +58,22 @@ $(NAME_SERVER): ${OBJS_SERVER}
 $(NAME_CLIENT): ${OBJS_CLIENT}
 	@echo "\n *** COMPILING CLIENT PROGRAM ***\n"
 	${CC} ${OBJS_CLIENT} ${LIBRARY} -o ${NAME_CLIENT}
+
+#BONUS RULES#
+
+bonus: norminette libft compile_bonus
+
+compile_bonus: ${NAME_SERVER_BONUS} ${NAME_CLIENT_BONUS}
+
+$(NAME_SERVER_BONUS): ${OBJS_SERVER_BONUS}
+	@echo "\n *** COMPILING SERVER BONUS PROGRAM ***\n"
+	${CC} ${OBJS_SERVER_BONUS} ${LIBRARY} -o ${NAME_SERVER}
+
+$(NAME_CLIENT_BONUS): ${OBJS_CLIENT_BONUS}
+	@echo "\n *** COMPILING CLIENT BONUS PROGRAM ***\n"
+	${CC} ${OBJS_CLIENT_BONUS} ${LIBRARY} -o ${NAME_CLIENT}
+
+#CLEAN RULES#
 
 clean:
 	${MAKE} -C ./libft clean --silent
