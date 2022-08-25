@@ -6,7 +6,7 @@
 /*   By: enunez-n <enunez-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 19:29:47 by enunez-n          #+#    #+#             */
-/*   Updated: 2022/08/25 17:13:23 by enunez-n         ###   ########.fr       */
+/*   Updated: 2022/08/25 18:59:12 by enunez-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	send_bits(unsigned char c_byte, int server_pid)
 			kill(server_pid, SIGUSR2);
 		else
 			kill(server_pid, SIGUSR1);
-		usleep(100);
+		usleep(500);
 	}
 	return (0);
 }
