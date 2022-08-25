@@ -44,6 +44,7 @@ all:  norminette libft compile
 norminette: 
 	@echo "\n *** CHECKING 42 NORMINETTE ***\n"
 	@norminette src/
+	@norminette src_bonus/
 
 libft: 
 	@echo "\n *** COMPILING LIBFT ***\n"
