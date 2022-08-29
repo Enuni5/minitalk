@@ -35,7 +35,9 @@ SRC = ft_atoi.c \
 	ft_printf.c \
 	printchars.c \
 	printdigits.c \
-	printhexa.c
+	printhexa.c \
+	get_next_line_bonus.c \
+	get_next_line_utils_bonus.c
 
 SRC_BONUS = ft_lstnew_bonus.c \
 	ft_lstadd_front_bonus.c \
@@ -62,22 +64,26 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
 .c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 $(NAME): ${OBJS}
-	${AR} ${NAME} ${OBJS}
+	@${AR} ${NAME} ${OBJS} 
+	@echo Libft 🧑‍💻 Compiled 💙
 
 all: ${NAME}
 
 bonus: ${OBJS_BONUS} ${OBJS}
-	${AR} ${NAME} ${OBJS} ${OBJS_BONUS}
+	@${AR} ${NAME} ${OBJS} ${OBJS_BONUS}
+	@echo Libft with lists functions 🧑‍💻 Compiled 💙
 
 clean:
-	${RM} ${OBJS} ${OBJS_BONUS} 
+	@${RM} ${OBJS} ${OBJS_BONUS} 
+	@echo Removing objects 🧹
 
 fclean: clean
-	${RM} ${NAME}
+	@${RM} ${NAME}
+	@echo Also removing library 📚
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus 

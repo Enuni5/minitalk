@@ -37,7 +37,7 @@ RM = rm -f
 #RULES#
 
 .c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 all:  norminette libft compile
 
@@ -48,17 +48,17 @@ norminette:
 
 libft: 
 	@echo "\n *** COMPILING LIBFT ***\n"
-	${MAKE} -C ./libft --silent
+	@${MAKE} -C ./libft
 
 compile: ${NAME_SERVER} ${NAME_CLIENT}
 
 $(NAME_SERVER): ${OBJS_SERVER}
 	@echo "\n *** COMPILING SERVER PROGRAM ***\n"
-	${CC} ${OBJS_SERVER} ${LIBRARY} -o ${NAME_SERVER}
+	@${CC} ${OBJS_SERVER} ${LIBRARY} -o ${NAME_SERVER}
 
 $(NAME_CLIENT): ${OBJS_CLIENT}
 	@echo "\n *** COMPILING CLIENT PROGRAM ***\n"
-	${CC} ${OBJS_CLIENT} ${LIBRARY} -o ${NAME_CLIENT}
+	@${CC} ${OBJS_CLIENT} ${LIBRARY} -o ${NAME_CLIENT}
 
 #BONUS RULES#
 
@@ -68,23 +68,23 @@ compile_bonus: ${NAME_SERVER_BONUS} ${NAME_CLIENT_BONUS}
 
 $(NAME_SERVER_BONUS): ${OBJS_SERVER_BONUS}
 	@echo "\n *** COMPILING SERVER BONUS PROGRAM ***\n"
-	${CC} ${OBJS_SERVER_BONUS} ${LIBRARY} -o ${NAME_SERVER}
+	@${CC} ${OBJS_SERVER_BONUS} ${LIBRARY} -o ${NAME_SERVER}
 
 $(NAME_CLIENT_BONUS): ${OBJS_CLIENT_BONUS}
 	@echo "\n *** COMPILING CLIENT BONUS PROGRAM ***\n"
-	${CC} ${OBJS_CLIENT_BONUS} ${LIBRARY} -o ${NAME_CLIENT}
+	@${CC} ${OBJS_CLIENT_BONUS} ${LIBRARY} -o ${NAME_CLIENT}
 
 #CLEAN RULES#
 
 clean:
-	${MAKE} -C ./libft clean --silent
-	${RM} ${OBJS_SERVER} ${OBJS_CLIENT} 
-	${RM} ${OBJS_SERVER_BONUS} ${OBJS_CLIENT_BONUS}
+	@${MAKE} -C ./libft clean
+	@${RM} ${OBJS_SERVER} ${OBJS_CLIENT} 
+	@${RM} ${OBJS_SERVER_BONUS} ${OBJS_CLIENT_BONUS}
 
 
 fclean: clean
-	${MAKE} -C ./libft fclean --silent
-	${RM} ${NAME_CLIENT} ${NAME_SERVER}
+	@${MAKE} -C ./libft fclean
+	@${RM} ${NAME_CLIENT} ${NAME_SERVER}
 
 re: fclean all
 
