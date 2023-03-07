@@ -26,7 +26,7 @@ NAME_CLIENT_BONUS = client_bonus
 
 #COMPILATION UTILS#
 
-LIBRARY = libft/libft.a
+LIBRARY = ../libft/libft.a
 
 CC = gcc
 
@@ -48,7 +48,7 @@ norminette:
 
 libft: 
 	@echo "\n *** COMPILING LIBFT ***\n"
-	@${MAKE} -C ./libft
+	@${MAKE} -C ../libft
 
 compile: ${NAME_SERVER} ${NAME_CLIENT}
 
@@ -77,13 +77,13 @@ $(NAME_CLIENT_BONUS): ${OBJS_CLIENT_BONUS}
 #CLEAN RULES#
 
 clean:
-	@${MAKE} -C ./libft clean
+	@${MAKE} -C ../libft clean
 	@${RM} ${OBJS_SERVER} ${OBJS_CLIENT} 
 	@${RM} ${OBJS_SERVER_BONUS} ${OBJS_CLIENT_BONUS}
 
 
 fclean: clean
-	@${MAKE} -C ./libft fclean
+	@${MAKE} -C ../libft fclean
 	@${RM} ${NAME_CLIENT} ${NAME_SERVER}
 
 re: fclean all
